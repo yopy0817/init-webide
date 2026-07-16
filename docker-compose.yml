@@ -13,8 +13,8 @@ services:
     networks:
       - caddy_network
   code-server:
-    image: cwj3688/code-server-hol3
-    container_name: code-server-hol3
+    image: coding404/init-webide:latest
+    container_name: code-server
     restart: always
     ports:
       - "3000:3000"
