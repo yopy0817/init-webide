@@ -14,6 +14,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     bash-completion \
     && rm -rf /var/lib/apt/lists/*
 
+# --- AWS CLI v2 ---
+RUN curl -fsSLo /tmp/awscliv2.zip \
+      https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip && \
+    unzip -q /tmp/awscliv2.zip -d /tmp && \
+    /tmp/aws/install && \
+    aws --version && \
+    rm -rf /tmp/aws /tmp/awscliv2.zip
+
 # Install Terraform
 RUN wget -O - https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp.list && \
